@@ -1,25 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import { AppstoreOutlined, LinkOutlined, DollarOutlined, SecurityScanOutlined } from '@ant-design/icons';
+import type { MenuProps } from 'antd';
+import { Layout, Menu, theme } from 'antd';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 
-function App() {
+const { Header, Content, Sider } = Layout;
+
+type MenuItem = Required<MenuProps>['items'][number];
+
+const sideMenuItems: MenuItem[] = [
+  {
+    key: '1',
+    icon: <AppstoreOutlined />,
+    label: <Link to="/applications" className='text-decoration-none color-inherit'>Applications</Link>
+  },
+  {
+    key: '2',
+    icon: <LinkOutlined />,
+    label: 'Connections',
+  },
+  {
+    key: '3',
+    icon: <DollarOutlined />,
+    label: 'Cost',
+  },
+  {
+    key: '4',
+    icon: <SecurityScanOutlined />,
+    label: 'Security',
+  }
+]
+
+const App: React.FC = () => {
+  const [collapsed, setCollapsed] = useState(false);
+  const {
+    token: { colorBgContainer, borderRadiusLG },
+  } = theme.useToken();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate("/applications");
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout className='h-[100vh]'>
+      <Sider collapsible collapsed={collapsed} onCollapse={() => setCollapsed(!collapsed)}>
+        <div className='flex items-center justify-center h-16'>
+          {!collapsed && <img src="https://assets-global.website-files.com/63304b2ff06e34d93fb8f9da/65e6cc504b1b88e8b4f7c2e4_Kapstan.svg" alt="Kapstan"/>}
+          {collapsed && <img className='h-10 w-10' src="https://assets-global.website-files.com/657053c91099d1b431c94c71/657071f8eedd87f098b39b50_Vectors-Wrapper.svg" alt="Kapstan"/>}
+        </div>
+        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={sideMenuItems}/>
+      </Sider>
+      <Layout>
+        <Outlet />
+      </Layout>
+    </Layout>
   );
 }
 
