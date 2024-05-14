@@ -1,5 +1,6 @@
 import { Application, CpuUtilization, EventHistory, MemoryUtilization } from "../types/application";
 import { map, groupBy, prop } from 'ramda';
+import moment from"moment";
 
 export const getApplications = (data: any[]): Application[] => {
   return map(({ id, name, status, version, updatedAt, desiredVersion }) => ({
@@ -18,7 +19,7 @@ export const getEventHistory = (data: any[]): EventHistory[] => {
     event,
     status,
     version,
-    timestamp: +timestamp,
+    timestamp: moment.unix(timestamp).fromNow(),
     applicationId: +applicationId
   }), data);
 }
@@ -27,7 +28,7 @@ export const getCpuUtilization = (data: any[]): CpuUtilization[] => {
   return map(({ id, timestamp, cpuUtilization, applicationId }) => ({
     id,
     cpuUtilization: +cpuUtilization,
-    timestamp: +timestamp,
+    timestamp: moment.unix(timestamp).format("hh:mm a"),
     applicationId: +applicationId
   }), data);
 }
@@ -36,7 +37,7 @@ export const getMemoryUtilization = (data: any[]): MemoryUtilization[] => {
   return map(({ id, timestamp, memoryUtilization, applicationId }) => ({
     id,
     memoryUtilization: +memoryUtilization,
-    timestamp: +timestamp,
+    timestamp: moment.unix(timestamp).format("hh:mm a"),
     applicationId: +applicationId
   }), data);
 }

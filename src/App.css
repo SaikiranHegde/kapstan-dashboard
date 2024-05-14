@@ -1,0 +1,24 @@
+.ant-table-wrapper {
+  height: 450px !important;
+}
+.ant-spin-nested-loading {
+  height: 450px !important;
+}
+.ant-spin-container {
+  height: 450px !important;
+}
+.ant-table {
+  height: 450px !important;
+}
+.ant-table-container {
+  height: 450px !important;
+}
+.ant-layout-sider-trigger {
+  background-color: #37146B !important;
+}
+.ant-menu-dark  {
+  background-color: #37146B !important;
+}
+.ant-menu-dark > .ant-menu-item-selected {
+  background-color: #4D1B95 !important;
+}
