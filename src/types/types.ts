@@ -1,5 +1,3 @@
-import { Application, CpuUtilizationGroup } from "./application";
-
 export enum Status {
   SUCCESS = "SUCCESS",
   ERROR = "ERROR"

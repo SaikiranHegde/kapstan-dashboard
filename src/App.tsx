@@ -39,7 +39,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     navigate("/applications");
-  }, []);
+  }, [navigate]);
 
   return (
     <Layout className='h-[100vh]'>
